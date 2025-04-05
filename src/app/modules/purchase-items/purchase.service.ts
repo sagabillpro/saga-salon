@@ -158,7 +158,7 @@ const createBulk = async (req: AuthenticatedRequest, data: PurchaseHeaders) => {
           companyId: user.companyId,
         });
         console.log("pass2");
-
+        console.log("headerEntry", headerEntry);
         // ************** A) stock logic start ************************************************************
         const stockEntries: ItemsStockTrack[] = [];
         //1. create Stock and save stock
@@ -174,7 +174,7 @@ const createBulk = async (req: AuthenticatedRequest, data: PurchaseHeaders) => {
           stockInstance.quantityUvailable = value.quantity;
           stockInstance.txnHeaderId = headerEntry.id;
           stockInstance.stockNumber = skuMap[value.service.id];
-          stockInstance.companyId=user.companyId;
+          stockInstance.companyId = user.companyId;
           stockEntries.push(stockInstance);
         });
         const itemIdStockMap: {
@@ -243,6 +243,16 @@ const createBulk = async (req: AuthenticatedRequest, data: PurchaseHeaders) => {
           PurchaseHeaders,
           headerEntry
         );
+        //loop through stockTrackResult and update txnHeaderId
+        stockTrackResult.forEach((val) => {
+          val.txnHeaderId = headerEntryResult.id;
+        });
+        //update stockTrackResult with new txnHeaderId
+        await transactionalEntityManager.save(
+          ItemsStockTrack,
+          stockTrackResult
+        );
+        //loop through itemAvailableEntry and update txnHeaderId
         //********** header entry save end *********************************************************************/
         data = headerEntryResult;
       }
@@ -275,7 +285,7 @@ const purchaseInvoiceData = async (id: number) => {
     const companyRepo = dataSource.getRepository(Company);
     const company = await companyRepo.findOne({
       where: {
-        id: 40, 
+        id: 40,
       },
       select: {
         id: true,
