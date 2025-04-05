@@ -49,9 +49,14 @@ const findStocks = async (id: number, companyId: number) => {
           name: true,
           id: true,
         },
+        txnHeader: {
+          id: true,
+          code: true,
+        },
       },
       relations: {
         service: true,
+        txnHeader: true,
       },
     });
 
