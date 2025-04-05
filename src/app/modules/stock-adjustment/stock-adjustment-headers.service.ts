@@ -126,7 +126,7 @@ const create = async (
     // Fetch the current available items for the selected service IDs
     const itemsAvailable = await itemAvailableRepo.find({
       where: { service: { id: In(selectedServiceIds) } },
-      select: { id: true, quantity: true, service: { id: true, name: true } },
+      select: { id: true, quantity: true, serviceId: true },
     });
 
     // Fetch current stock tracking records for the selected service IDs
