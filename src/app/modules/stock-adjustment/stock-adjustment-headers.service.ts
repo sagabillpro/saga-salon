@@ -27,7 +27,7 @@ const find = async (filter?: FindManyOptions<StockAdjustmentHeaders>) => {
 };
 
 //1. find multiple records
-const findStocks = async (id: number,companyId:number) => {
+const findStocks = async (id: number, companyId: number) => {
   try {
     const dataSource = await handler();
     const stockRepo = dataSource.getRepository(ItemsStockTrack);
@@ -35,7 +35,7 @@ const findStocks = async (id: number,companyId:number) => {
       where: {
         ...(id ? { serviceId: id } : {}),
         isInactive: 0,
-        companyId:companyId
+        companyId: companyId,
       },
       select: {
         id: true,
@@ -133,19 +133,19 @@ const create = async (
     const stockTracks = await itemsStockTrackRepo.find({
       where: { service: { id: In(selectedServiceIds) } },
     });
-
+    console.log("check1");
     // Create mapping from serviceId to itemAvailable record
     const itemAvailableMap: { [key: number]: ItemAvailable } = {};
     itemsAvailable.forEach((item) => {
       itemAvailableMap[item.serviceId] = item;
     });
-
+    console.log("check2");
     // Create mapping from stock track id to stock track record
     const stockTrackMap: { [key: number]: ItemsStockTrack } = {};
     stockTracks.forEach((track) => {
       stockTrackMap[track.id] = track;
     });
-
+    console.log("check3");
     // Build a final mapping for each service: sum up the final variation
     // (there might be multiple adjustment lines per service)
     const finalMapping: { [key: number]: number } = {};
@@ -153,13 +153,15 @@ const create = async (
       const currentTotal = finalMapping[line.serviceId] || 0;
       finalMapping[line.serviceId] = currentTotal + line.finalVariation;
     });
-
+    console.log("check4");
     // Update the quantity of each item available using the final mapping.
     for (const [serviceIdStr, totalFinalVariation] of Object.entries(
       finalMapping
     )) {
       const serviceId = Number(serviceIdStr);
       const itemAvailable = itemAvailableMap[serviceId];
+      console.log("check5",itemAvailableMap);
+      console.log("check6",itemAvailable);
       // Update quantity by adding the total variation from adjustments
       itemAvailable.quantity += totalFinalVariation;
       finalItemAvailable.push(itemAvailable);
@@ -167,6 +169,7 @@ const create = async (
 
     // Update each stock track record with the new quantities from adjustment lines.
     // Assuming each adjustment line corresponds to a specific stock track entry (using record id).
+    console.log("check7");
     adjustmentLinesData.forEach((line) => {
       const track = stockTrackMap[line.stockId];
       // Update the track record with new quantities (assumed to be provided in the adjustment line)
@@ -174,7 +177,7 @@ const create = async (
       track.quantityUvailable = line.quantityUvailableNew;
       finalItemStockTrack.push(track);
     });
-
+    console.log("check8");
     // Start a transaction to save header and related updates
     await dataSource.manager.transaction(
       "SERIALIZABLE",
@@ -193,6 +196,7 @@ const create = async (
           StockAdjustmentHeaders,
           createdHeader
         );
+        console.log("check9");
         transactionalEntityManager.save(ItemAvailable, finalItemAvailable);
         transactionalEntityManager.save(ItemsStockTrack, finalItemStockTrack);
       }
@@ -200,6 +204,7 @@ const create = async (
 
     return data;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
