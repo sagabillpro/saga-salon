@@ -131,15 +131,16 @@ const create = async (
 
     // Fetch current stock tracking records for the selected service IDs
     const stockTracks = await itemsStockTrackRepo.find({
-      where: { service: { id: In(selectedServiceIds) } },
+      where: { serviceId: In(selectedServiceIds) },
     });
     console.log("check1");
     // Create mapping from serviceId to itemAvailable record
     const itemAvailableMap: { [key: number]: ItemAvailable } = {};
     itemsAvailable.forEach((item) => {
+      console.log("check2  inned", item);
       itemAvailableMap[item.serviceId] = item;
     });
-    console.log("check2");
+    console.log("check2", itemAvailableMap);
     // Create mapping from stock track id to stock track record
     const stockTrackMap: { [key: number]: ItemsStockTrack } = {};
     stockTracks.forEach((track) => {
@@ -160,8 +161,8 @@ const create = async (
     )) {
       const serviceId = Number(serviceIdStr);
       const itemAvailable = itemAvailableMap[serviceId];
-      console.log("check5",itemAvailableMap);
-      console.log("check6",itemAvailable);
+      console.log("check5", itemAvailableMap);
+      console.log("check6", itemAvailable);
       // Update quantity by adding the total variation from adjustments
       itemAvailable.quantity += totalFinalVariation;
       finalItemAvailable.push(itemAvailable);
