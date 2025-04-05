@@ -44,6 +44,7 @@ const findStocks = async (id: number, companyId: number) => {
         quantityAdded: true,
         quantityUvailable: true,
         unitPrice: true,
+        txnHeaderId:true,
         stockNumber: true,
         service: {
           name: true,
