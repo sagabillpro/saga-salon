@@ -12,6 +12,7 @@ import {
 
 import { Services } from "../../services/entities/services.entity";
 import { StockAdjustmentHeaders } from "./stock-adjustment-headers.entity";
+import { ItemsStockTrack } from "../../purchase-items/entities/item-stock-track.entity";
 
 @Entity("stock_adjustment_lines")
 export class StockAdjustmentLines {
@@ -37,9 +38,9 @@ export class StockAdjustmentLines {
   @Column({ type: "int", nullable: true })
   stockId: number;
 
-  @ManyToOne(() => Services)
+  @ManyToOne(() => ItemsStockTrack)
   @JoinColumn()
-  stock: Services;
+  stock: ItemsStockTrack;
   // Original quantities
   @Column({ type: "int", nullable: true })
   quantityAdded: number;
