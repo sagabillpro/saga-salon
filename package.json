@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf dist",
-    "copy-assets": "cpx \"src/app/templates/**/*\" \"dist/app/templates\"",
-    "copy-ejs": "cpx \"src/app/templates/**/*\" \"dist/app/templates\"",
-    "build": "tsc && npm run copy-assets",
-    "prestart": "npm run build",
-    "start": "node dist/index.js",
-    "dev": "concurrently \"tsc --watch\" \"nodemon --watch dist dist/index.js\" \"cpx 'src/app/templates/**/*' 'dist/app/templates' --watch\" \"cpx '.env' 'dist/' --watch\""
-  },
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "clean": "rimraf dist",
+  "copy-assets": "copyfiles \"src/app/templates/**/*\" dist/app/templates",
+  "copy-ejs": "copyfiles \"src/app/templates/**/*\" dist/app/templates",
+  "build": "tsc && npm run copy-assets",
+  "prestart": "npm run build",
+  "start": "node dist/index.js",
+  "dev": "concurrently \"tsc --watch\" \"nodemon --watch dist dist/index.js\" \"copyfiles -w 'src/app/templates/**/*' dist/app/templates\" \"copyfiles -w '.env' dist/\""
+},
+
   "author": "",
   "license": "ISC",
   "dependencies": {

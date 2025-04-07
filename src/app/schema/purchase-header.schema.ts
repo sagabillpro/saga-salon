@@ -40,9 +40,9 @@ export const PurchaseHeadersSchema: any = {
       type: "object",
       properties: {
         id: { type: "integer" },
-      //  name: { type: "string" },
+        //  name: { type: "string" },
       },
-     // required: ["id", "name"],
+      // required: ["id", "name"],
       additionalProperties: false,
     },
     supplierId: {
@@ -85,6 +85,42 @@ export const PurchaseHeadersSchema: any = {
               required: ["id", "name", "percentage", "taxAmount"],
               additionalProperties: false,
             },
+          },
+          hallMarkDetails: {
+            type: "object",
+            properties: {
+              rate: {
+                type: "number",
+              },
+              taxGroupComponents: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    id: {
+                      type: "integer",
+                      minimum: 1,
+                    },
+                    name: {
+                      type: "string",
+                      minLength: 1,
+                    },
+                    percentage: {
+                      type: "number",
+                      minimum: 0,
+                      maximum: 100,
+                    },
+                    taxAmount: {
+                      type: "number",
+                      minimum: 0,
+                    },
+                  },
+                  required: ["id", "name", "percentage", "taxAmount"],
+                  additionalProperties: false,
+                },
+              },
+            },
+            required: ["rate", "taxGroupComponents"],
           },
           txnHeader: {
             type: "object",
@@ -170,6 +206,7 @@ export const PurchaseHeadersSchema: any = {
           },
         },
         required: [
+          "hallMarkDetails",
           "taxGroupComponents",
           "service",
           "amount",

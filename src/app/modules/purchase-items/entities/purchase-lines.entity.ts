@@ -46,6 +46,9 @@ export class PurchaseLines {
   @Column({ type: "jsonb", nullable: true })
   taxGroupComponents: any; 
 
+  @Column({ type: "jsonb", nullable: true })
+  hallMarkDetails: any; 
+  
   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
   rate: number;
 
