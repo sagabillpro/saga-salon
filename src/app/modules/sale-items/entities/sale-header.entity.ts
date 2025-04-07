@@ -78,6 +78,15 @@ export class SaleHeaders {
   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
   totalTax: number;
 
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  totalCgst: number;
+
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  totalSgst: number;
+
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  totalIgst: number;
+
   @CreateDateColumn({ type: "varchar", nullable: false })
   createdDate: string;
 
