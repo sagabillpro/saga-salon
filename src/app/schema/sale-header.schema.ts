@@ -9,6 +9,15 @@ export const SaleHeadersSchema: any = {
     grandTotal: { type: "number" }, // changed from integer
     totalDiscount: { type: "number" }, // changed from integer
     totalTax: { type: "number" }, // changed from integer
+    totalCgst: {
+      type: "number", // Changed to number for decimals
+    },
+    totalSgst: {
+      type: "number", // Changed to number for decimals
+    },
+    totalIgst: {
+      type: "number", // Changed to number for decimals
+    },
     isInactive: { type: "integer" },
     createdDate: { type: "string", format: "date-time" },
     modifiedDate: { type: "string", format: "date-time" },

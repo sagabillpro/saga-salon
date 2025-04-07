@@ -46,7 +46,7 @@ export class PurchaseHeaders {
 
   @CreateDateColumn({ type: "varchar", nullable: true })
   saleInvoiceNumber: string;
-  
+
   @Column({ type: "int", nullable: true })
   companyId: number;
 
@@ -79,18 +79,27 @@ export class PurchaseHeaders {
   @JoinColumn()
   transactionStatus: DTransactionStatus;
 
-   // Changed from integer to decimal (precision 10, scale 2)
-   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
-   subTotal: number;
- 
-   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
-   grandTotal: number;
- 
-   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
-   totalDiscount: number;
- 
-   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
-   totalTax: number;
+  // Changed from integer to decimal (precision 10, scale 2)
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  subTotal: number;
+
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  grandTotal: number;
+
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  totalDiscount: number;
+
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  totalTax: number;
+  
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  totalCgst: number;
+
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  totalSgst: number;
+
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  totalIgst: number;
 
   @CreateDateColumn({ type: "varchar", nullable: false })
   createdDate: string;

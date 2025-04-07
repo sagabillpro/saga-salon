@@ -25,6 +25,15 @@ export const PurchaseHeadersSchema: any = {
     totalTax: {
       type: "number", // Changed to number for decimals
     },
+    totalCgst: {
+      type: "number", // Changed to number for decimals
+    },
+    totalSgst: {
+      type: "number", // Changed to number for decimals
+    },
+    totalIgst: {
+      type: "number", // Changed to number for decimals
+    },
     createdDate: {
       type: "string",
       format: "date-time",
