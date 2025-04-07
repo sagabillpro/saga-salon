@@ -94,6 +94,9 @@ export class Services {
   @Column({ type: "varchar", length: 100, nullable: true })
   brand: string;
 
+  @Column({ type: "varchar", length: 400, nullable: true })
+  hsnCode: string;
+
   @Column({ type: "int", nullable: true })
   uomId: number;
 
