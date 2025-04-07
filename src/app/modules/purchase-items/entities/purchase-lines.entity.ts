@@ -87,4 +87,12 @@ export class PurchaseLines {
 
   @Column({ type: "int", default: 0 })
   isInactive: number;
+  @Column({ type: "varchar", nullable: true })
+  huid: string; // HUID number for tracking precious metals
+  @Column({ type: "varchar", nullable: true })
+  karat: string; // Karat weight for tracking precious metals
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  makingChargeRs: number; // Making charge amount for precious metals
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  makingChargePercentage: number; // Making charge percentage for precious metals
 }

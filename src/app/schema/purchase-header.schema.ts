@@ -185,7 +185,18 @@ export const PurchaseHeadersSchema: any = {
           costPrice: {
             type: "number", // Changed to number for decimals
           },
-
+          huid: {
+            type: "string", // Changed to number for decimals
+          },
+          karat: {
+            type: "string", // Changed to number for decimals
+          },
+          makingChargeRs: {
+            type: "number", // Changed to number for decimals
+          },
+          makingChargePercentage: {
+            type: "number", // Changed to number for decimals
+          },
           uom: {
             type: "object",
             properties: {

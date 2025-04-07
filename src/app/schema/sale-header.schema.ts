@@ -110,6 +110,18 @@ export const SaleHeadersSchema: any = {
           quantity: { type: "integer" },
           isService: { type: "integer" },
           costPrice: { type: "integer" },
+          huid: {
+            type: "string", // Changed to number for decimals
+          },
+          karat: {
+            type: "string", // Changed to number for decimals
+          },
+          makingChargeRs: {
+            type: "number", // Changed to number for decimals
+          },
+          makingChargePercentage: {
+            type: "number", // Changed to number for decimals
+          },
           discountAmount: { type: "number" }, // changed from integer
           taxAmount: { type: "number" }, // changed from integer
           rate: { type: "number" }, // changed from integer
