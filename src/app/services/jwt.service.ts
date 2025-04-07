@@ -1,17 +1,15 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import path from "path";
-
-// Load environment variables from .env file
-dotenv.config({ path: path.join(__dirname, "../../.env") });
+dotenv.config();
 // 1. Generate Access Token
 export function generateAccessToken(payload: {
   userId: number;
   companyId: number;
   companyName: string;
-  upiId:string,
-  stateId:number,
-  taxId:number
+  upiId: string;
+  stateId: number;
+  taxId: number;
   userName: string;
   email: string;
   userType: {
@@ -19,9 +17,14 @@ export function generateAccessToken(payload: {
     name: string;
   };
 }): string {
-  return jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, {
-    expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
-  });
+  try {
+    return jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
+    });
+  } catch (error) {
+    return error; // Return null if token generation fails
+
+  }
 }
 
 // 2. Generate Refresh Token
@@ -30,9 +33,9 @@ export function generateRefreshToken(payload: {
   userId: number;
   companyId: number;
   companyName: string;
-  upiId:string,
-  stateId:number,
-  taxId:number
+  upiId: string;
+  stateId: number;
+  taxId: number;
   email: string;
   userType: {
     id: number;

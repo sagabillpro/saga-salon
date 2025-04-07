@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { AuthenticatedRequest } from "../types";
 // Load environment variables from .env file
-dotenv.config({ path: path.join(__dirname, "../../.env") });
+dotenv.config();
 const secretKey = process.env.ACCESS_TOKEN_SECRET || "your-secret-key"; // Use an environment variable for the secret key
 
 const authenticateToken = (
@@ -25,6 +25,7 @@ const authenticateToken = (
   // Verify and decode the token
   jwt.verify(token, secretKey, (err, decoded) => {
     if (err) {
+      console.log("ddddddd",err);
       return res.status(440).json({ message: "401" });
     }
     // Attach the decoded data to the request object

@@ -1,4 +1,4 @@
-import { FindManyOptions, FindOneOptions } from "typeorm";
+import { FindManyOptions, FindOneOptions, In } from "typeorm";
 
 import { handler } from "../../../app/config/dbconfig";
 import { UOM } from "./entities/uom.entity";
@@ -9,6 +9,13 @@ const repository = async () => {
   //1. find all records
   const find = async (option?: FindManyOptions<UOM>) => {
     try {
+      option={
+        ...option,
+        where: {
+          ...option?.where,
+          id:In([1,3]), // Example of using In operator to filter by multiple IDs
+        },
+      }
       return await repo.find(option);
     } catch (error) {
       throw error;

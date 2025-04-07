@@ -293,7 +293,6 @@ const login = async (data: {
       },
     },
   });
-  console.log(foundUser);
   if (foundUser) {
     if (foundUser.isInactive) {
       throw { message: "Your account has been deactivated by the admin. Please contact support for assistance.", statusCode: 401 };
@@ -473,7 +472,7 @@ const decodedToken = async (
         id: number;
         name: string;
       };
-    } = await verifyToken(token);
+    } = await verifyToken(token,true);
     return userData;
   } catch (err) {
     throw err;

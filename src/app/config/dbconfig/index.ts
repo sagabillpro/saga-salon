@@ -10,7 +10,7 @@ import { ServicesSubscriber } from "../../history/event-subscriber/services.subs
 import { UsersSubscriber } from "../../history/event-subscriber/user.subscriber";
 
 // Load environment variables from .env file
-dotenv.config({ path: path.join(__dirname, "../../.env") });
+dotenv.config();
 let appDataSource: DataSource;
 
 const initializeDataSource = async (): Promise<DataSource> => {

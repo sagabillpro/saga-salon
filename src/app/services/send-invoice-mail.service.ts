@@ -4,7 +4,7 @@ import * as ejs from "ejs";
 import dotenv from "dotenv";
 
 // Load environment variables from .env file
-dotenv.config({ path: path.join(__dirname, "../../.env") });
+dotenv.config();
 import nodemailer from "nodemailer";
 
 interface invoiceDetails {
