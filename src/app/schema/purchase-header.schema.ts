@@ -177,7 +177,7 @@ export const PurchaseHeadersSchema: any = {
             type: "number", // Changed to number for decimals
           },
           quantity: {
-            type: "integer",
+            type: "number",
           },
           unitPrice: {
             type: "number",

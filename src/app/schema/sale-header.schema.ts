@@ -107,9 +107,9 @@ export const SaleHeadersSchema: any = {
           amount: { type: "number" }, // changed from integer
           unitPrice: { type: "number" },
           uomId: { type: "number" },
-          quantity: { type: "integer" },
+          quantity: { type: "number" },
           isService: { type: "integer" },
-          costPrice: { type: "integer" },
+          costPrice: { type: "number" },
           huid: {
             type: "string", // Changed to number for decimals
           },
@@ -148,7 +148,6 @@ export const SaleHeadersSchema: any = {
     "createdDate",
     "modifiedDate",
     "customer",
-    "userId",
     "paymentTypeId",
     "saleLines",
     "isService",
