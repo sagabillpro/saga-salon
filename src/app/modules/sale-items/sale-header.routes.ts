@@ -165,7 +165,7 @@ router.get(
       // Path to your EJS template file
       const renderedPath = path.join(
         process.cwd(),
-        "/dist/app/templates",
+        "/dist/app/templates/templates",
         "sale-invoice.template.ejs"
       );
       // Render the EJS template to HTML
