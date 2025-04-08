@@ -44,11 +44,11 @@ export class PurchaseLines {
   taxGroup: TaxGroup;
 
   @Column({ type: "jsonb", nullable: true })
-  taxGroupComponents: any; 
+  taxGroupComponents: any;
 
   @Column({ type: "jsonb", nullable: true })
-  hallMarkDetails: any; 
-  
+  hallMarkDetails: any;
+
   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
   rate: number;
 
@@ -60,6 +60,7 @@ export class PurchaseLines {
 
   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
   quantity: number;
+  
   @Column({ type: "int", nullable: true })
   uomId: number;
 
@@ -84,7 +85,18 @@ export class PurchaseLines {
 
   @DeleteDateColumn() // 👈 Automatically set when deleted
   deletedAt?: Date;
+  // JSONB column to store tax breakdown
+  @Column({ type: "int", default: 0, nullable: true })
+  isService: number;
 
   @Column({ type: "int", default: 0 })
   isInactive: number;
+  @Column({ type: "varchar", nullable: true })
+  huid: string; // HUID number for tracking precious metals
+  @Column({ type: "varchar", nullable: true })
+  karat: string; // Karat weight for tracking precious metals
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  makingChargeRs: number; // Making charge amount for precious metals
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  makingChargePercentage: number; // Making charge percentage for precious metals
 }

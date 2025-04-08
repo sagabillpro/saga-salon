@@ -177,7 +177,7 @@ export const PurchaseHeadersSchema: any = {
             type: "number", // Changed to number for decimals
           },
           quantity: {
-            type: "integer",
+            type: "number",
           },
           unitPrice: {
             type: "number",
@@ -185,7 +185,18 @@ export const PurchaseHeadersSchema: any = {
           costPrice: {
             type: "number", // Changed to number for decimals
           },
-
+          huid: {
+            type: "string", // Changed to number for decimals
+          },
+          karat: {
+            type: "string", // Changed to number for decimals
+          },
+          makingChargeRs: {
+            type: "number", // Changed to number for decimals
+          },
+          makingChargePercentage: {
+            type: "number", // Changed to number for decimals
+          },
           uom: {
             type: "object",
             properties: {
@@ -213,6 +224,7 @@ export const PurchaseHeadersSchema: any = {
             type: "string",
             format: "date-time",
           },
+          isService: { type: "integer" },
         },
         required: [
           // "hallMarkDetails",
@@ -235,7 +247,7 @@ export const PurchaseHeadersSchema: any = {
     "createdDate",
     "modifiedDate",
     "supplier",
-    "userId",
+    //    "userId",
     "paymentTypeId",
     "purchaseLines",
     "subTotal",

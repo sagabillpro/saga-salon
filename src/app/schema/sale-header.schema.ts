@@ -107,9 +107,21 @@ export const SaleHeadersSchema: any = {
           amount: { type: "number" }, // changed from integer
           unitPrice: { type: "number" },
           uomId: { type: "number" },
-          quantity: { type: "integer" },
+          quantity: { type: "number" },
           isService: { type: "integer" },
-          costPrice: { type: "integer" },
+          costPrice: { type: "number" },
+          huid: {
+            type: "string", // Changed to number for decimals
+          },
+          karat: {
+            type: "string", // Changed to number for decimals
+          },
+          makingChargeRs: {
+            type: "number", // Changed to number for decimals
+          },
+          makingChargePercentage: {
+            type: "number", // Changed to number for decimals
+          },
           discountAmount: { type: "number" }, // changed from integer
           taxAmount: { type: "number" }, // changed from integer
           rate: { type: "number" }, // changed from integer
@@ -136,7 +148,6 @@ export const SaleHeadersSchema: any = {
     "createdDate",
     "modifiedDate",
     "customer",
-    "userId",
     "paymentTypeId",
     "saleLines",
     "isService",

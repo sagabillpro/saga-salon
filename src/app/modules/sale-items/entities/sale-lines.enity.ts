@@ -82,12 +82,21 @@ export class SaleLines {
   isInactive: number;
 
   @Column({ type: "jsonb", nullable: true })
-  taxGroupComponents: any; 
-  
+  taxGroupComponents: any;
+
   // JSONB column to store tax breakdown
   @Column({ type: "int", default: 0, nullable: false })
   isService: number;
 
   @DeleteDateColumn() // 👈 Automatically set when deleted
   deletedAt?: Date;
+  //add this properties huid?: string karat?: string  makingChargeRs?: number makingChargePercentage?: number
+  @Column({ type: "varchar", nullable: true })
+  huid: string; // HUID number for tracking precious metals
+  @Column({ type: "varchar", nullable: true })
+  karat: string; // Karat weight for tracking precious metals
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  makingChargeRs: number; // Making charge amount for precious metals
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  makingChargePercentage: number; // Making charge percentage for precious metals
 }
