@@ -51,7 +51,7 @@ export class SaleLines {
   @JoinColumn()
   uom: UOM;
 
-  @Column({ type: "int", nullable: false })
+  @Column({ type: "decimal", nullable: false })
   quantity: number;
 
   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })

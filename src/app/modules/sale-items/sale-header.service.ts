@@ -1175,6 +1175,7 @@ const createBulk = async (
     }
     return result;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
