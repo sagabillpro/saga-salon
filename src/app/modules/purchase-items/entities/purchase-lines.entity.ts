@@ -60,6 +60,7 @@ export class PurchaseLines {
 
   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
   quantity: number;
+  
   @Column({ type: "int", nullable: true })
   uomId: number;
 

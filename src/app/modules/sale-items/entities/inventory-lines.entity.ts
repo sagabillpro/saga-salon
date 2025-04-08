@@ -61,7 +61,7 @@ export class InventoryLines {
   @JoinColumn()
   sale: SaleHeaders;
 
-  @Column({ type: "int", nullable: false })
+  @Column({ type: "decimal", nullable: true })
   quantity: number;
 
   @CreateDateColumn({ type: "varchar", nullable: false })
