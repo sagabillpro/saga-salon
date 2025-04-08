@@ -227,8 +227,8 @@ export const PurchaseHeadersSchema: any = {
           isService: { type: "integer" },
         },
         required: [
-          "hallMarkDetails",
-          "taxGroupComponents",
+          // "hallMarkDetails",
+          // "taxGroupComponents",
           "service",
           "amount",
           "createdDate",
