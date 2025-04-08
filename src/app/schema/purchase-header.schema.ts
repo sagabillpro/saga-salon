@@ -215,8 +215,8 @@ export const PurchaseHeadersSchema: any = {
           },
         },
         required: [
-          "hallMarkDetails",
-          "taxGroupComponents",
+          // "hallMarkDetails",
+          // "taxGroupComponents",
           "service",
           "amount",
           "createdDate",
