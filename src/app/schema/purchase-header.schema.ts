@@ -247,7 +247,7 @@ export const PurchaseHeadersSchema: any = {
     "createdDate",
     "modifiedDate",
     "supplier",
-    "userId",
+    //    "userId",
     "paymentTypeId",
     "purchaseLines",
     "subTotal",
