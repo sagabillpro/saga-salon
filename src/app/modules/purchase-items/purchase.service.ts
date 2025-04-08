@@ -128,7 +128,9 @@ const createBulk = async (req: AuthenticatedRequest, data: PurchaseHeaders) => {
     const itemRepo = dataSource.getRepository(Services);
 
     data.purchaseLines.forEach((value) => {
-      itemIds.push(value.service.id);
+      if (!value.isService) {
+        itemIds.push(value.service.id);
+      }
     });
     //. 1.create itemId and sku mapping
     const skuMap: {
@@ -165,17 +167,19 @@ const createBulk = async (req: AuthenticatedRequest, data: PurchaseHeaders) => {
         console.log("pass3 ");
 
         data.purchaseLines.forEach((value) => {
-          const stockInstance = new ItemsStockTrack();
-          stockInstance.createdDate = value.createdDate;
-          stockInstance.modifiedDate = value.modifiedDate;
-          stockInstance.quantityAdded = value.quantity;
-          stockInstance.unitPrice = value.unitPrice;
-          stockInstance.serviceId = value.service.id;
-          stockInstance.quantityUvailable = value.quantity;
-          stockInstance.txnHeaderId = headerEntry.id;
-          stockInstance.stockNumber = skuMap[value.service.id];
-          stockInstance.companyId = user.companyId;
-          stockEntries.push(stockInstance);
+          if (!value.isService) {
+            const stockInstance = new ItemsStockTrack();
+            stockInstance.createdDate = value.createdDate;
+            stockInstance.modifiedDate = value.modifiedDate;
+            stockInstance.quantityAdded = value.quantity;
+            stockInstance.unitPrice = value.unitPrice;
+            stockInstance.serviceId = value.service.id;
+            stockInstance.quantityUvailable = value.quantity;
+            stockInstance.txnHeaderId = headerEntry.id;
+            stockInstance.stockNumber = skuMap[value.service.id];
+            stockInstance.companyId = user.companyId;
+            stockEntries.push(stockInstance);
+          }
         });
         const itemIdStockMap: {
           [key: number]: number;
@@ -205,14 +209,16 @@ const createBulk = async (req: AuthenticatedRequest, data: PurchaseHeaders) => {
         //2. create inventory
         console.log("pass7");
         data.purchaseLines.forEach((value) => {
-          const il = new InventoryLines();
-          il.serviceId = value.service.id;
-          il.quantity = Number(value.quantity);
-          il.createdDate = value.createdDate;
-          il.modifiedDate = value.modifiedDate;
-          il.purchaseId = headerEntry.id;
-          il.stockId = itemIdStockMap[value.service.id];
-          inventory.push(il);
+          if (!value.isService) {
+            const il = new InventoryLines();
+            il.serviceId = value.service.id;
+            il.quantity = Number(value.quantity);
+            il.createdDate = value.createdDate;
+            il.modifiedDate = value.modifiedDate;
+            il.purchaseId = headerEntry.id;
+            il.stockId = itemIdStockMap[value.service.id];
+            inventory.push(il);
+          }
         });
         console.log("pass8");
         //attch the object to inventory

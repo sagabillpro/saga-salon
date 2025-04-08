@@ -224,6 +224,7 @@ export const PurchaseHeadersSchema: any = {
             type: "string",
             format: "date-time",
           },
+          isService: { type: "integer" },
         },
         required: [
           "hallMarkDetails",
