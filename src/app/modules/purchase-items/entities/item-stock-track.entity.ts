@@ -38,10 +38,10 @@ export class ItemsStockTrack {
   @Column({ type: "varchar", nullable: true })
   stockNumber: string;
 
-  @Column({ type: "int", nullable: false })
+  @Column({ type: "decimal", nullable: false })
   quantityAdded: number;
 
-  @Column({ type: "int", nullable: false })
+  @Column({ type: "decimal", nullable: false })
   quantityUvailable: number;
 
   @CreateDateColumn({ type: "varchar", nullable: false })

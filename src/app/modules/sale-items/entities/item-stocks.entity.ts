@@ -26,7 +26,7 @@ export class ItemAvailable {
   @JoinColumn()
   service: Services;
 
-  @Column({ type: "int", nullable: false })
+  @Column({ type: "decimal", nullable: false })
   quantity: number;
 
   @UpdateDateColumn({ type: "varchar", nullable: false })
