@@ -69,7 +69,7 @@ export default async function invoiceMailer<T extends invoiceDetails>(data: T) {
   try {
     const templatePath = path.join(
       __dirname,
-      "../templates",
+      "../templates/templates",
       "sale-invoice.template.ejs"
     );
     const transporter = nodemailer.createTransport({

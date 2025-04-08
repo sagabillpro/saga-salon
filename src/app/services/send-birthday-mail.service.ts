@@ -36,7 +36,7 @@ export async function sendBirthdayEmail({
   });
   const templatePath = path.join(
     __dirname,
-    "../templates",
+    "../templates/templates",
     "birthday.template.ejs"
   );
   const htmlContent = await ejs.renderFile(templatePath, {

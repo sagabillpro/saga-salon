@@ -39,7 +39,7 @@ export async function sendReferalEmail({
   });
   const templatePath = path.join(
     __dirname,
-    "../templates",
+    "../templates/templates",
     "referal.template.ejs"
   );
   const htmlContent = await ejs.renderFile(templatePath, {

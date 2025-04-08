@@ -37,7 +37,7 @@ export async function sendAnniverseryEmail({
   });
   const templatePath = path.join(
     __dirname,
-    "../templates",
+    "../templates/templates",
     "anniversery.template.ejs"
   );
   const htmlContent = await ejs.renderFile(templatePath, {
