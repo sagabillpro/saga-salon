@@ -5,6 +5,7 @@ import { Customer } from "./entities/customer.entity";
 import { generateCode } from "../../utils/get-object-code.util";
 import { handler } from "../../config/dbconfig";
 import { City, Country, States } from "../general-data/entities";
+import { Contact } from "../contacts/entities/contact.entity";
 
 //1. find multiple records
 const find = async (filter?: FindManyOptions<Customer>) => {
@@ -22,7 +23,7 @@ const findById = async (
 ) => {
   try {
     const repo = await repository();
-    const respo = await repo.findOneById(id,filter);
+    const respo = await repo.findOneById(id, filter);
     return respo;
   } catch (error) {
     throw error;
@@ -150,5 +151,69 @@ const deleteById = async (id: number) => {
     throw error;
   }
 };
+//1. find multiple records
+const getCustomersWithBirthdays = async (companyId?: number) => {
+  try {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const dataSource = await handler();
+    const customers = await dataSource
+      .getRepository(Contact)
+      .createQueryBuilder("customer")
+      .leftJoinAndSelect("customer.company", "company")
+      .andWhere("EXTRACT(MONTH FROM customer.birthDate) = :month", { month })
+      .andWhere("EXTRACT(DAY FROM customer.birthDate) = :day", { day })
+      .andWhere("company.id = :companyId", { companyId })
+      .andWhere("customer.contactTypeId = :contactTypeId", { contactTypeId: 1 })
+      .select([
+        "customer.id",
+        "customer.name",
+        "customer.email",
+        "customer.mobile",
+        "customer.birthDate",
+      ])
+      .getMany();
+    return customers;
+  } catch (error) {
+    throw error;
+  }
+};
 
-export default { find, findById, create, deleteById, updateById };
+//1. find multiple records
+const getCustomersWithAnniversery = async (companyId?: number) => {
+  try {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const dataSource = await handler();
+    const customers = await dataSource
+      .getRepository(Contact)
+      .createQueryBuilder("customer")
+      .leftJoinAndSelect("customer.company", "company")
+      .andWhere("EXTRACT(MONTH FROM customer.anniverseryDate) = :month", { month })
+      .andWhere("EXTRACT(DAY FROM customer.anniverseryDate) = :day", { day })
+      .andWhere("company.id = :companyId", { companyId })
+      .andWhere("customer.contactTypeId = :contactTypeId", { contactTypeId: 1 })
+      .select([
+        "customer.id",
+        "customer.name",
+        "customer.email",
+        "customer.mobile",
+        "customer.birthDate",
+      ])
+      .getMany();
+    return customers;
+  } catch (error) {
+    throw error;
+  }
+};
+export default {
+  find,
+  findById,
+  create,
+  deleteById,
+  updateById,
+  getCustomersWithBirthdays,
+  getCustomersWithAnniversery,
+};

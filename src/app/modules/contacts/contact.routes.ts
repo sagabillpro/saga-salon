@@ -7,6 +7,8 @@ import ContactService from "./contact.service";
 import { validateRequestBody } from "../../utils/get-model-schema.util";
 import getQuerySecure from "../../utils/get-query-secure.util";
 import authenticateToken from "../../middlewares/authenticate.middleware";
+import { AuthenticatedRequest } from "../../types";
+import customerService from "../customer/customer.service";
 const router = Router();
 
 router.get(
@@ -78,6 +80,39 @@ router.delete(
       const id = Number(req.params.id);
       await ContactService.deleteById(id);
       res.send();
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+router.get(
+  "/customer-birthdays/get",
+  validateFilter(Contact),
+  authenticateToken,
+  async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+      const user: any = req?.user;
+      const result = await customerService.getCustomersWithBirthdays(
+        user.companyId
+      );
+      res.send(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get(
+  "/customer-anniversery/get",
+  validateFilter(Contact),
+  authenticateToken,
+  async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+      const user: any = req?.user;
+      const result = await customerService.getCustomersWithAnniversery(
+        user.companyId
+      );
+      res.send(result);
     } catch (error) {
       next(error);
     }
