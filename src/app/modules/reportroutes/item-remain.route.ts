@@ -41,7 +41,7 @@ router.get(
       // 2. Create a new Excel workbook and worksheet
       const workbook = new ExcelJS.Workbook();
       let worksheet = workbook.addWorksheet("Report");
-      worksheet = getWorksheetColumnsFromSchema(10, worksheet, result);
+      worksheet = getWorksheetColumnsFromSchema(15, worksheet, result);
       // 5. Stream the Excel file as a response
       res.setHeader(
         "Content-Type",

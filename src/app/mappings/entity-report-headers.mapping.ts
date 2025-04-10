@@ -141,5 +141,19 @@ const FilterSchemaMapping: Record<string, any> = {
       },
     ],
   },
+  15: {
+    URL: "item-remain-report",
+    tableHeader: [
+      {
+        header: "Item Name",
+        accessorKey: "service.name",
+      },
+
+      {
+        header: "Available Quantity",
+        accessorKey: "quantity",
+      },
+    ],
+  },
 };
 export default FilterSchemaMapping;
