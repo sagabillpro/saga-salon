@@ -62,11 +62,11 @@ const findStocks = async (id: number, companyId: number) => {
     });
 
     const groupedData = stockResponse.reduce((acc: any, item: any) => {
-      const serviceName = item.service.name;
+      const serviceName = item?.service?.name;
 
       // Check if service name already exists
       const existingGroup: any = acc.find(
-        (group: any) => group.name === serviceName
+        (group: any) => group?.name === serviceName
       );
 
       if (existingGroup) {
