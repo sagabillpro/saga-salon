@@ -1,6 +1,6 @@
 import {
-  EventSubscriber,
   EntitySubscriberInterface,
+  EventSubscriber,
   UpdateEvent,
 } from "typeorm";
 import { Company } from "../../modules/company/entities/company.entity";
@@ -58,3 +58,5 @@ export class CompanySubscriber implements EntitySubscriberInterface<Company> {
     }
   }
 }
+
+//akshay
